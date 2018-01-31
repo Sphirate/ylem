@@ -26,7 +26,7 @@ export const createReducer = (initialState, getConfig) => {
     const dispatch = (...actions) => {
         const newState = actions
             .reduce((acc, { type, payload }) => {
-                const handler = this[SymbolHandlers].get(type);
+                const handler = handlers.get(type);
                 if (handler) {
                     return handler(acc, payload);
                 }
