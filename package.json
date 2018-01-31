@@ -1,0 +1,15 @@
+{
+  "name": "ylem",
+  "version": "0.0.1",
+  "description": "State managment tool for JavaScript apps",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "javascript",
+    "state-managment"
+  ],
+  "author": "Dmitry Rykov <sphirate@gmail.com>",
+  "license": "MIT"
+}
