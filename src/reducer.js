@@ -1,10 +1,11 @@
 import { SymbolDispatch, SymbolGetActionTypes } from './symbols';
-import { combineListeners } from './helpers';
+import { combineListeners, buildSubscriptions } from './helpers';
 
 export const createReducer = (initialState, getConfig) => {
     const handlers = new Map();
     let state = initialState;
-    let listeners = [];
+
+    const { getSubscriptions, subscribe } = buildSubscriptions();
 
     const on = (actionType, handler) => {
         if (typeof handler !== 'function') {
@@ -20,7 +21,7 @@ export const createReducer = (initialState, getConfig) => {
             return [];
         }
         state = newState;
-        return [combineListeners(state, listeners)];
+        return [combineListeners(state, getSubscriptions())];
     };
 
     const dispatch = (...actions) => {
@@ -33,16 +34,6 @@ export const createReducer = (initialState, getConfig) => {
                 return acc;
             }, state);
         return emit(newState);
-    };
-
-    const subscribe = (listener) => {
-        if (typeof listener !== 'function') {
-            throw new Error('Listener should be a function');
-        }
-        listeners.push(listener);
-        return () => {
-            listeners = listeners.filter(fn => fn !== listeners);
-        };
     };
 
     return {

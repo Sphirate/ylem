@@ -1,5 +1,5 @@
 import { SymbolDispatch, SymbolGetActionTypes } from './symbols';
-import { combineListeners, isReducer } from './helpers';
+import { combineListeners, isReducer, buildSubscriptions } from './helpers';
 
 export const combineReducers = (map) => {
     if (!Object.values(map).every(isReducer)) {
@@ -11,7 +11,7 @@ export const combineReducers = (map) => {
 
     const handlers = new Map();
     let state = combineStates();
-    let listeners = [];
+    const { getSubscriptions, subscribe } = buildSubscriptions();
 
     const handlersMap = Object.values(map).reduce((acc, reducer) => {
         reducer[SymbolGetActionTypes]().forEach((type) => {
@@ -31,6 +31,7 @@ export const combineReducers = (map) => {
         }
 
         state = combineStates();
+        const listeners = getSubscriptions();
 
         if (!listeners.length) {
             return listenersChain;
@@ -53,16 +54,6 @@ export const combineReducers = (map) => {
             }, [])
             .reduce((acc, handler) => [...acc, ...handler(...appliableActions)], []);
         return emit(listenersChain);
-    };
-
-    const subscribe = (listener) => {
-        if (typeof listener !== 'function') {
-            throw new Error('Listener should be a function');
-        }
-        listeners.push(listener);
-        return () => {
-            listeners = listeners.filter(fn => fn !== listeners);
-        };
     };
 
     return {
