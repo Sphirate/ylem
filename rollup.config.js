@@ -10,7 +10,7 @@ const baseConfig = {
     },
     plugins: [
         babel({
-            exclude: 'node_modules/**'
+            exclude: 'node_modules/**',
         }),
     ],
 };
@@ -23,7 +23,7 @@ const minConfig = {
     },
     plugins: [
         babel({
-            exclude: 'node_modules/**'
+            exclude: 'node_modules/**',
         }),
         uglify(),
     ],

@@ -13,7 +13,7 @@ export const createStore = (reducer) => {
         }
         if (!actions.every(isAction)) {
             throw new Error('Illegal action format');
-        } 
+        }
         if (isDispatching) {
             throw new Error('Reducers may not dispatch actions.');
         }
@@ -25,7 +25,7 @@ export const createStore = (reducer) => {
         } finally {
             isDispatching = false;
         }
-    }
+    };
 
     return {
         dispatch,

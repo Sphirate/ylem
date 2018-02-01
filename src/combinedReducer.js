@@ -7,7 +7,7 @@ export const combineReducers = (map) => {
     }
 
     const combineStates = () => Object.keys(map)
-        .reduce((acc, key) => Object.assign({}, acc, {[key]: map[key].getState() }), {});
+        .reduce((acc, key) => Object.assign({}, acc, { [key]: map[key].getState() }), {});
 
     const handlers = new Map();
     let state = combineStates();
@@ -15,13 +15,13 @@ export const combineReducers = (map) => {
 
     const handlersMap = Object.values(map).reduce((acc, reducer) => {
         reducer[SymbolGetActionTypes]().forEach((type) => {
-            const handlersSet = [ ...(acc[type] || []), reducer[SymbolDispatch]];
+            const handlersSet = [...(acc[type] || []), reducer[SymbolDispatch]];
             acc[type] = handlersSet;
         });
         return acc;
     }, {});
 
-    Object.keys(handlersMap).forEach(actionType => {
+    Object.keys(handlersMap).forEach((actionType) => {
         handlers.set(actionType, handlersMap[actionType]);
     });
 
@@ -36,7 +36,7 @@ export const combineReducers = (map) => {
             return listenersChain;
         }
 
-        return [ ...listenersChain, combineListeners(state, listeners)];
+        return [...listenersChain, combineListeners(state, listeners)];
     };
 
     const dispatch = (...actions) => {
@@ -53,7 +53,7 @@ export const combineReducers = (map) => {
             }, [])
             .reduce((acc, handler) => [...acc, ...handler(...appliableActions)], []);
         return emit(listenersChain);
-    }
+    };
 
     const subscribe = (listener) => {
         if (typeof listener !== 'function') {
@@ -71,4 +71,4 @@ export const combineReducers = (map) => {
         [SymbolDispatch]: dispatch,
         [SymbolGetActionTypes]: () => Array.from(handlers.keys()),
     };
-}
+};
