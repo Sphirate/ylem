@@ -1,6 +1,13 @@
 import babel from 'rollup-plugin-babel';
 import uglify from 'rollup-plugin-uglify';
 
+const babelPlugin = babel({
+    exclude: 'node_modules/**',
+    plugins: [
+        'external-helpers',
+    ],
+});
+
 const baseConfig = {
     input: './src/index.js',
     output: {
@@ -9,9 +16,7 @@ const baseConfig = {
         format: 'umd',
     },
     plugins: [
-        babel({
-            exclude: 'node_modules/**',
-        }),
+        babelPlugin,
     ],
 };
 const minConfig = {
@@ -22,9 +27,7 @@ const minConfig = {
         format: 'umd',
     },
     plugins: [
-        babel({
-            exclude: 'node_modules/**',
-        }),
+        babelPlugin,
         uglify(),
     ],
 };
