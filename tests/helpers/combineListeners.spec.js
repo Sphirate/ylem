@@ -9,6 +9,14 @@ describe('helpers::combineListeners', () => {
         expect(combineListeners).toEqual(expect.any(Function));
     });
 
+    test('throw error if lsiteners argument is not an array', () => {
+        expect(combineListeners(null, null)).toThrow();
+    });
+
+    test('throw error if lsiteners argument has non-function element', () => {
+        expect(combineListeners(null, [null])).toThrow();
+    });
+
     test('return function', () => {
         expect(combineListeners(null, [])).toEqual(expect.any(Function));
     });
