@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "jest",
+    "coverage": "jest --coverage",
     "build": "rollup --config ./rollup.config.js",
     "lint": "eslint src"
   },
