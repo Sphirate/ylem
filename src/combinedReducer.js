@@ -25,7 +25,7 @@ export const combineReducers = (map) => {
         handlers.set(actionType, handlersMap[actionType]);
     });
 
-    const emit = (listenersChain = []) => {
+    const emit = (listenersChain) => {
         if (!listenersChain.length) {
             return listenersChain;
         }
