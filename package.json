@@ -2,7 +2,8 @@
   "name": "ylem",
   "version": "0.0.1",
   "description": "State managment tool for JavaScript apps",
-  "main": "lib/index.js",
+  "main": "./lib/index.min.js",
+  "module": "./src/index.js",
   "scripts": {
     "test": "jest",
     "coverage": "jest --coverage",
@@ -19,8 +20,10 @@
   },
   "author": "Dmitry Rykov <sphirate@gmail.com>",
   "files": [
-    "lib"
+    "./lib/",
+    "./src/"
   ],
+  "typings": "./typings.d.ts",
   "license": "MIT",
   "devDependencies": {
     "babel": "^6.23.0",

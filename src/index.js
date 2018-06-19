@@ -1,3 +1,3 @@
-export * from './reducer';
-export * from './combinedReducer';
-export * from './root';
+export * from './create-reducer';
+export * from './dispatch';
+export * from './combine-reducers';
