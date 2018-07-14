@@ -1,11 +1,12 @@
 export const combineReducers = (reducersMap) => {
-    const keys = Object.keys(reducersMap);
+    const entries = Object.entries(reducersMap);
     const reducers = Object.values(reducersMap);
 
-    const reducer = () => keys
-        .reduce((acc, key) => Object.assign({}, acc, { [key]: reducersMap[key].getState() }), {});
-    reducer.subscribe = listener => reducers.forEach(innerReducer => innerReducer.subscribe(listener));
-    reducer.getSubscriptions = () => [];
+    const reducer = () => entries.reduce((acc, [key, fn]) => ({ ...acc, [key]: fn() }), {});
+    reducer.subscribe = (listener) => {
+        const unsubscribers = reducers.map(innerReducer => innerReducer.subscribe(listener));
+        return () => unsubscribers.forEach(fn => fn());
+    };
 
-    return reducer;
+    return Object.freeze(reducer);
 };

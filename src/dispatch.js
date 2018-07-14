@@ -1,4 +1,4 @@
-import { getReducersByActionType, getMutator } from './bind-reducer';
+import { getReducersByActionType, getMutator, getSubscriptions } from './bind-reducer';
 
 const call = fn => fn();
 
@@ -16,7 +16,7 @@ export const dispatch = (...actions) => {
                 const applyStateFn = getMutator(reducer)(...actions);
                 if (applyStateFn) {
                     applyStates.push(applyStateFn);
-                    reducer.getSubscriptions().forEach(sub => subscriptions.add(sub));
+                    getSubscriptions(reducer).forEach(sub => subscriptions.add(sub));
                 }
             });
         applyStates.forEach(call);
