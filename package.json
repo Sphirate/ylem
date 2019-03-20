@@ -20,12 +20,12 @@
   },
   "author": "Dmitry Rykov <sphirate@gmail.com>",
   "files": [
-    "./lib/",
+    "./lib/*",
     "./src/"
   ],
   "typings": "./typings.d.ts",
   "license": "MIT",
-  "devDependencies": {
+  "optionalDependencies": {
     "babel": "^6.23.0",
     "babel-core": "^6.26.0",
     "babel-jest": "^22.1.0",

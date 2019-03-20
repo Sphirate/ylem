@@ -1,3 +1,4 @@
-export * from './create-reducer';
-export * from './dispatch';
-export * from './combine-reducers';
+import * as errors from './errors';
+
+export * from './state-factory';
+export { errors };
