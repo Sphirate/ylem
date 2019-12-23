@@ -1,18 +1,6 @@
 {
     "presets": [
-        [
-            "env",
-            {
-                "modules": false,
-                "targets": {
-                    "browsers": ["IE >= 9"]
-                }
-            }
-        ]
-    ],
-    "env": {
-        "test": {
-            "presets": ["env"]
-        }
-    }
+        "@babel/preset-typescript",
+        "@babel/preset-env"
+    ]
 }

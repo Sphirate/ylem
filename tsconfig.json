@@ -1,13 +1,28 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
-        "target": "es2016",
-        "jsx": "preserve",
-        "experimentalDecorators": true,
-        "allowJs": true
+        "module": "esnext",
+        "target": "esnext",
+        "declaration": true,
+        "declarationDir": "./types",
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "baseUrl": ".",
+        "paths": {
+            "@ylem/core": ["projects/core/src/index.ts"],
+            "@ylem/core/*": ["projects/core/src/*"],
+            "@ylem/state": ["projects/state/src/index.ts"],
+            "@ylem/state/*": ["projects/state/src/*"],
+            "@ylem/struct": ["project/struct/src/index.ts"],
+            "@ylem/struct/*": ["project/struct/src/*"],
+            "@ylem/collection": ["projects/collection/src/index.ts"],
+            "@ylem/collection/*": ["projects/collection/src/*"]
+        }
     },
     "exclude": [
-        "node_modules",
-        "**/node_modules/*"
+        "projects/core/tests"
     ]
 }
