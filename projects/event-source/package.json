@@ -20,9 +20,15 @@
     "type": "git",
     "url": "https://github.com/Sphirate/ylem.git"
   },
-  "author": { "name": "Dmitry Rykov", "email": "sphirate@gmail.com" },
+  "author": {
+    "name": "Dmitry Rykov",
+    "email": "sphirate@gmail.com"
+  },
   "contributors": [
-    { "name": "Dmitry Rykov", "email": "sphirate@gmail.com" }
+    {
+      "name": "Dmitry Rykov",
+      "email": "sphirate@gmail.com"
+    }
   ],
   "files": [
     "lib",

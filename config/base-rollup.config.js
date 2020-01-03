@@ -18,6 +18,11 @@ export const getConfig = (packageName, external = externals) => [
             name: packageName,
             file: `./lib/index.js`,
             format: 'cjs',
+            globals: {
+                "@ylem/event-source": "YlemEventSource",
+                "@ylem/core": "YlemCore",
+                "@ylem/state": "YlemState",
+            },
         },
         plugins: [
             typescript({ useTsconfigDeclarationDir: true }),
@@ -30,6 +35,11 @@ export const getConfig = (packageName, external = externals) => [
             name: packageName,
             file: `./dist/index.js`,
             format: 'umd',
+            globals: {
+                "@ylem/event-source": "YlemEventSource",
+                "@ylem/core": "YlemCore",
+                "@ylem/state": "YlemState",
+            },
         },
         plugins: [
             typescript({ tsconfigOverride: { compilerOptions: { declaration: false } }}),
@@ -42,6 +52,11 @@ export const getConfig = (packageName, external = externals) => [
             name: packageName,
             file: `./dist/index.min.js`,
             format: 'umd',
+            globals: {
+                "@ylem/event-source": "YlemEventSource",
+                "@ylem/core": "YlemCore",
+                "@ylem/state": "YlemState",
+            },
         },
         plugins: [
             typescript({ tsconfigOverride: { compilerOptions: { declaration: false } }}),
