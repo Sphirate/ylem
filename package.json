@@ -7,7 +7,6 @@
     "clean": "cd ./projects/event-source & npm run clean",
     "test": "./node_modules/.bin/jest.cmd",
     "coverage": "./node_modules/.bin/jest.cmd --coverage",
-    "prebuild": "npm run clean",
     "build": "cd ./projects/event-source & npm run build"
   },
   "repository": {

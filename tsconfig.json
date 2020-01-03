@@ -3,21 +3,11 @@
         "module": "esnext",
         "target": "esnext",
         "declaration": true,
-        "declarationDir": "./types",
         "strict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "moduleResolution": "node",
-        "esModuleInterop": true,
         "skipLibCheck": true,
-        "baseUrl": ".",
-        "paths": {
-            "@ylem/core": ["projects/core/src/index.ts"],
-            "@ylem/core/*": ["projects/core/src/*"],
-            "@ylem/state": ["projects/state/src/index.ts"],
-            "@ylem/struct": ["project/struct/src/index.ts"],
-            "@ylem/collection": ["projects/collection/src/index.ts"],
-            "@ylem/event-source": ["projects/event-source/src/index.ts"]
-        }
+        "baseUrl": "."
     }
 }
