@@ -5,8 +5,8 @@ export type Comparator<StateType = any> = (previousValue: StateType, currentValu
 
 export abstract class BaseState<T = any> {
     public abstract get(): T;
-    public onChange: EventSource = new EventSource();
-    public onSyncChange: EventSource = new EventSource();
+    public onChange = new EventSource();
+    public onSyncChange = new EventSource();
 }
 
 export abstract class BaseChangeableState<T = any> extends BaseState<T> {

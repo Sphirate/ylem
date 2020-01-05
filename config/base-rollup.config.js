@@ -1,15 +1,18 @@
 import path from "path";
-import fs from "fs";
 
 import typescript from 'rollup-plugin-typescript2';
 import { terser } from 'rollup-plugin-terser';
 
+const tsConfigBuildPath = path.resolve(__dirname, "tsconfig.build.json");
 const packageJSON = require(path.resolve(__dirname, "package.json"));
 
-const projects = fs.readdirSync(path.resolve(__dirname, ".."))
-    .map((dirName) => `@ylem/${ dirName }`);
+const externals = [ ...Object.keys(packageJSON.dependencies || {}) ];
 
-const externals = [ ...projects, ...Object.keys(packageJSON.dependencies || {}) ];
+const globals = {
+    "@ylem/event-source": "YlemEventSource",
+    "@ylem/core": "YlemCore",
+    "@ylem/state": "YlemState",
+};
 
 export const getConfig = (packageName, external = externals) => [
     {
@@ -18,14 +21,10 @@ export const getConfig = (packageName, external = externals) => [
             name: packageName,
             file: `./lib/index.js`,
             format: 'cjs',
-            globals: {
-                "@ylem/event-source": "YlemEventSource",
-                "@ylem/core": "YlemCore",
-                "@ylem/state": "YlemState",
-            },
+            globals,
         },
         plugins: [
-            typescript({ useTsconfigDeclarationDir: true }),
+            typescript({ useTsconfigDeclarationDir: true, tsconfig: tsConfigBuildPath }),
         ],
         external: externals,
     },
@@ -35,14 +34,10 @@ export const getConfig = (packageName, external = externals) => [
             name: packageName,
             file: `./dist/index.js`,
             format: 'umd',
-            globals: {
-                "@ylem/event-source": "YlemEventSource",
-                "@ylem/core": "YlemCore",
-                "@ylem/state": "YlemState",
-            },
+            globals,
         },
         plugins: [
-            typescript({ tsconfigOverride: { compilerOptions: { declaration: false } }}),
+            typescript({ tsconfigOverride: { compilerOptions: { declaration: false, composite: false }, tsconfig: tsConfigBuildPath }}),
         ],
         external: external,
     },
@@ -52,14 +47,10 @@ export const getConfig = (packageName, external = externals) => [
             name: packageName,
             file: `./dist/index.min.js`,
             format: 'umd',
-            globals: {
-                "@ylem/event-source": "YlemEventSource",
-                "@ylem/core": "YlemCore",
-                "@ylem/state": "YlemState",
-            },
+            globals,
         },
         plugins: [
-            typescript({ tsconfigOverride: { compilerOptions: { declaration: false } }}),
+            typescript({ tsconfigOverride: { compilerOptions: { declaration: false, composite: false }, tsconfig: tsConfigBuildPath }}),
             terser({
                 compress: {
                     pure_getters: true,

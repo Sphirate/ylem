@@ -8,6 +8,20 @@
         "noUnusedParameters": true,
         "moduleResolution": "node",
         "skipLibCheck": true,
-        "baseUrl": "."
-    }
+        "esModuleInterop": true,
+        "baseUrl": ".",
+        "paths": {
+            "@ylem/event-source": ["./projects/event-source"],
+            "@ylem/core": ["./projects/core"],
+            "@ylem/state": ["./projects/state"]
+        }
+    },
+    "include": [
+        "./projects",
+    ],
+    "references": [
+        { "path": "./projects/event-source" },
+        { "path": "./projects/core" },
+        { "path": "./projects/state" }
+    ]
 }
