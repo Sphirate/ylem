@@ -1,6 +1,6 @@
 import { EventSource } from "../src/index";
 
-describe.skip("EventSource", () => {
+describe("EventSource", () => {
     test("exist", () => expect(EventSource).toBeDefined());
     test("is class", () => expect(new EventSource()).toBeInstanceOf(EventSource));
     test("dispatch data to subscribed listener", () => {
@@ -59,5 +59,17 @@ describe.skip("EventSource", () => {
 
         eventSource.removeListener(listener);
         expect(eventSource.hasListener(listener)).toStrictEqual(false);
+    });
+    test("listener will be called once for event even if it subscribed more then once", () => {
+        const listener = jest.fn();
+        const eventSource = new EventSource();
+
+        eventSource.addListener(listener);
+        eventSource.addListener(listener);
+        eventSource.addListener(listener);
+
+        eventSource.dispatch();
+
+        expect(listener).toBeCalledTimes(1);
     });
 });
