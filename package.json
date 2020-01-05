@@ -13,18 +13,24 @@
     "type": "git",
     "url": "https://github.com/Sphirate/ylem.git"
   },
-  "author": { "name": "Dmitry Rykov", "email": "sphirate@gmail.com" },
+  "author": {
+    "name": "Dmitry Rykov",
+    "email": "sphirate@gmail.com"
+  },
   "contributors": [
-    { "name": "Dmitry Rykov", "email": "sphirate@gmail.com" }
+    {
+      "name": "Dmitry Rykov",
+      "email": "sphirate@gmail.com"
+    }
   ],
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^24.0.23",
+    "@types/jest": "^24.0.25",
     "jest": "^24.9.0",
-    "ts-jest": "^24.1.0",
+    "ts-jest": "^24.2.0",
     "tslib": "^1.10.0",
     "tslint": "^5.20.1",
-    "typescript": "^3.7.2"
+    "typescript": "^3.7.4"
   },
   "jest": {
     "testRegex": "(/test/.*\\.spec\\.[tj]s)$"
