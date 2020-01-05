@@ -6,12 +6,19 @@ import { terser } from 'rollup-plugin-terser';
 const tsConfigBuildPath = path.resolve(__dirname, "tsconfig.build.json");
 const packageJSON = require(path.resolve(__dirname, "package.json"));
 
-const externals = [ ...Object.keys(packageJSON.dependencies || {}) ];
+const externals = [
+    ...Object.keys(packageJSON.dependencies || {}),
+    ...Object.keys(packageJSON.peerDependencies || {}),
+    ...Object.keys(packageJSON.optionalDependencies || {}),
+    ...(packageJSON.bundledDependencies || []),
+    ...(packageJSON.bundleDependencies || []),
+];
 
 const globals = {
     "@ylem/event-source": "YlemEventSource",
     "@ylem/core": "YlemCore",
     "@ylem/state": "YlemState",
+    "react": "React",
 };
 
 export const getConfig = (packageName, external = externals) => [
