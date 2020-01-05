@@ -1,0 +1,7 @@
+/node_modules
+/lib
+/dist
+/types
+/npm-debug*
+/coverage
+/ylem-composition-*.tgz
