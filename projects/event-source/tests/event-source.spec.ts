@@ -1,6 +1,6 @@
 import { EventSource } from "../src/index";
 
-describe("EventSource", () => {
+describe.skip("EventSource", () => {
     test("exist", () => expect(EventSource).toBeDefined());
     test("is class", () => expect(new EventSource()).toBeInstanceOf(EventSource));
     test("dispatch data to subscribed listener", () => {
