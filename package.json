@@ -4,10 +4,23 @@
   "private": true,
   "description": "Monorepo for ylem pack",
   "scripts": {
-    "clean": "cd ./projects/event-source & npm run clean",
+    "clean": "echo \"Not implemented yet. Use `clean` task in every project\"",
+    "check:codestyle": "./node_modules/.bin/tslint.cmd -c ./tslint.json -p ./tsconfig.json",
+    "check:types:event-source": "./node_modules/.bin/tsc.cmd -p ./projects/event-source/tsconfig.build.json --noEmit",
+    "check:types:core": "./node_modules/.bin/tsc.cmd -p ./projects/core/tsconfig.build.json --noEmit",
+    "check:types:state": "./node_modules/.bin/tsc.cmd -p ./projects/state/tsconfig.build.json --noEmit",
+    "check:types:composition": "./node_modules/.bin/tsc.cmd -p ./projects/composition/tsconfig.build.json --noEmit",
+    "check:types:react-connect": "./node_modules/.bin/tsc.cmd -p ./projects/react-connect/tsconfig.build.json --noEmit",
+    "check:types": "npm run check:types:event-source & npm run check:types:core & npm run check:types:state & npm run check:types:composition & npm run check:types:react-connect",
+    "check": "npm run check:codestyle & npm run check:types",
     "test": "./node_modules/.bin/jest.cmd",
     "coverage": "./node_modules/.bin/jest.cmd --coverage",
-    "build": "cd ./projects/event-source & npm run build"
+    "build:event-source": "cd ./projects/event-source & npm run build",
+    "build:core": "cd ./projects/core & npm run build",
+    "build:state": "cd ./projects/state & npm run build",
+    "build:composition": "cd ./projects/composition & npm run build",
+    "build:react-connect": "cd ./projects/react-connect & npm run build",
+    "build": "npm run build:event-source & npm run build:core & npm run build:state & npm run build:composition & npm run build:react-connect"
   },
   "repository": {
     "type": "git",

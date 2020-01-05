@@ -23,7 +23,7 @@ describe.skip("EventSource", () => {
         eventSource.addListener(listener3);
 
         eventSource.dispatch();
-        
+
         expect(listener1).toBeCalledTimes(1);
         expect(listener2).toBeCalledTimes(1);
         expect(listener3).toBeCalledTimes(1);

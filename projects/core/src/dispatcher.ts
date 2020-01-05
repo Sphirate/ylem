@@ -23,13 +23,14 @@ const performUpdate = () => {
     });
 
     changesQueue.clear();
-}
+};
 
 export const stateChanged = <T>(change: Change<T>) => {
     if (changesQueue.size === 0) {
+        // tslint:disable-next-line: no-unused-expression
         new Promise((resolve) => resolve(performUpdate));
     }
-    
+
     const { eventSource, current } = change;
     changesQueue.set(eventSource, Object.assign(change, changesQueue.get(eventSource), { current }));
-}
+};

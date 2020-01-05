@@ -1,7 +1,7 @@
 jest.useFakeTimers();
 
-import { State } from "../src";
 import { YelmValidationError } from "@ylem/core";
+import { State } from "../src";
 
 describe.skip("State", () => {
     test("is defined", () => expect(State).toBeDefined());
@@ -19,7 +19,7 @@ describe.skip("State", () => {
 
     test("value syncroniously changes", () => {
         const testObject = {};
-        const state = new State<Object>({});
+        const state = new State<object>({});
         state.set(testObject);
         expect(state.get()).toStrictEqual(testObject);
     });
@@ -37,7 +37,7 @@ describe.skip("State", () => {
         const state = new State(0);
         state.onChange.addListener(listener);
         state.set(1);
-        
+
         jest.runAllTimers();
 
         expect(listener).toBeCalledTimes(1);
@@ -64,13 +64,13 @@ describe.skip("State", () => {
         const listener2 = jest.fn();
         const listener3 = jest.fn();
         const state = new State(0);
-        
+
         state.onChange.addListener(listener1);
         state.onChange.addListener(listener2);
         state.onChange.addListener(listener3);
-        
+
         state.set(1);
-        
+
         jest.runAllTimers();
 
         return Promise.resolve().then(() => {

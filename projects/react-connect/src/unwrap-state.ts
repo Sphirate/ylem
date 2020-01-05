@@ -5,4 +5,4 @@ export const unwrapState = <T = any>(value: BaseState<T> | T) => {
         return value.get();
     }
     return value;
-}
+};

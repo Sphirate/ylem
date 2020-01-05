@@ -1,8 +1,6 @@
-export interface EventSourceListener<Args extends Array<any> = []> {
-    (...args: Args): void;
-}
+export type EventSourceListener<Args extends any[] = []> = (...args: Args) => void;
 
-export class EventSource<Args extends Array<any> = []> {
+export class EventSource<Args extends any[] = []> {
     private listeners = new Set<EventSourceListener<Args>>();
 
     public addListener(listener: EventSourceListener<Args>) {

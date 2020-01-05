@@ -1,11 +1,15 @@
-import { YelmValidationError, stateChanged, Comparator, Validator, BaseChangeableState } from "@ylem/core";
+import { BaseChangeableState, Comparator, stateChanged, Validator, YelmValidationError } from "@ylem/core";
 
 export class State<StateType = any> extends BaseChangeableState<StateType> {
-    static defaultValidator = () => true;
-    static defaultComparator = <T = any>(previousValue: T, currentValue: T) => previousValue === currentValue;
-    static create = <T>(value: T, validator?: Validator<T>, comparator?: Comparator<T>) => new State(value, validator, comparator);
-    
-    constructor(private value: StateType, private validator: Validator<StateType> = State.defaultValidator, private comparator: Comparator<StateType> = State.defaultComparator) {
+    public static defaultValidator = () => true;
+    public static defaultComparator = <T = any>(previousValue: T, currentValue: T) => previousValue === currentValue;
+    public static create = <T>(value: T, validator?: Validator<T>, comparator?: Comparator<T>) => new State(value, validator, comparator);
+
+    constructor(
+        private value: StateType,
+        private validator: Validator<StateType> = State.defaultValidator,
+        private comparator: Comparator<StateType> = State.defaultComparator,
+    ) {
         super();
         if (!validator(this.value)) {
             throw new YelmValidationError();
@@ -26,10 +30,10 @@ export class State<StateType = any> extends BaseChangeableState<StateType> {
         const previous = this.value;
         this.value = value;
         stateChanged({
-            previous,
+            comparator: this.comparator,
             current: this.value,
             eventSource: this.onChange,
-            comparator: this.comparator,
+            previous,
         });
         this.onSyncChange.dispatch();
     }
