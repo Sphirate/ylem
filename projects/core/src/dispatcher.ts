@@ -27,8 +27,7 @@ const performUpdate = () => {
 
 export const stateChanged = <T>(change: Change<T>) => {
     if (changesQueue.size === 0) {
-        // tslint:disable-next-line: no-unused-expression
-        new Promise((resolve) => resolve(performUpdate));
+        Promise.resolve().then(performUpdate);
     }
 
     const { eventSource, current } = change;
