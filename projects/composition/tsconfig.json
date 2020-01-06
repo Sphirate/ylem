@@ -1,0 +1,19 @@
+{
+    "extends": "./../../tsconfig.json",
+    "compilerOptions": {
+        "declarationDir": "./types/",
+        "composite": true,
+        "baseUrl": ".",
+        "paths": {
+            "@ylem/core": ["./../core"],
+            "@ylem/state": ["./../state"]
+        }
+    },
+    "include": [
+        "."
+    ],
+    "references": [
+        { "path": "./../core" },
+        { "path": "./../state" }
+    ]
+}

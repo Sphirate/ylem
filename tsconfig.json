@@ -1,12 +1,27 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
-        "target": "es2016",
-        "jsx": "preserve",
-        "experimentalDecorators": true
+        "module": "esnext",
+        "target": "esnext",
+        "declaration": true,
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "moduleResolution": "node",
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "baseUrl": ".",
+        "paths": {
+            "@ylem/event-source": ["./projects/event-source"],
+            "@ylem/core": ["./projects/core"],
+            "@ylem/state": ["./projects/state"]
+        }
     },
-    "exclude": [
-        "node_modules",
-        "**/node_modules/*"
+    "include": [
+        "./projects",
+    ],
+    "references": [
+        { "path": "./projects/event-source" },
+        { "path": "./projects/core" },
+        { "path": "./projects/state" }
     ]
 }

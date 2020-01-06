@@ -1,0 +1,39 @@
+{
+  "name": "@ylem/event-source",
+  "version": "0.1.0",
+  "description": "Simple event source class for ylem ecosystem",
+  "main": "./dist/index.min.js",
+  "module": "./lib/index.js",
+  "types": "./types/index.d.ts",
+  "scripts": {
+    "clean": "rm -rf ./lib ./dist ./types ./coverage",
+    "prebuild": "npm run clean",
+    "build": "./node_modules/.bin/rollup.cmd --config ./rollup.config.js"
+  },
+  "keywords": [
+    "javascript",
+    "ylem",
+    "events",
+    "event source"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sphirate/ylem.git"
+  },
+  "author": {
+    "name": "Dmitry Rykov",
+    "email": "sphirate@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Dmitry Rykov",
+      "email": "sphirate@gmail.com"
+    }
+  ],
+  "files": [
+    "lib",
+    "dist",
+    "types"
+  ],
+  "license": "MIT"
+}

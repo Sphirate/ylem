@@ -1,0 +1,17 @@
+{
+    "extends": "./../../tsconfig.json",
+    "compilerOptions": {
+        "declarationDir": "./types/",
+        "composite": true,
+        "baseUrl": ".",
+        "paths": {
+            "@ylem/event-source": ["./../event-source"]
+        }
+    },
+    "include": [
+        "."
+    ],
+    "references": [
+        { "path": "./../event-source" }
+    ]
+}
