@@ -1,9 +1,12 @@
-import { YelmValidationError } from "@ylem/core";
+import { BaseChangeableState, BaseState, YelmValidationError } from "@ylem/core";
 import { State } from "../src";
 
 describe("State", () => {
     test("is defined", () => expect(State).toBeDefined());
     test("is class", () => expect(State.prototype).toBeDefined());
+    test("implements BaseState abstract class", () => expect(new State(1)).toBeInstanceOf(BaseState));
+    test("implements BaseChangeableState abstract class", () => expect(new State(1)).toBeInstanceOf(BaseChangeableState));
+    test("static create function create new instance", () => expect(State.create(0)).toBeInstanceOf(State));
     test("throw validation error on construction", () => expect(() => new State(0, () => false)).toThrowError(YelmValidationError));
     test("throw validation error on update", () => {
         const state = new State<number>(0, (value) => value === 0);
