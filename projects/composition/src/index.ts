@@ -2,7 +2,7 @@ import { BaseState, Comparator, stateChanged } from "@ylem/core";
 
 export class CompositionState<T = any, States extends BaseState[] = BaseState[]> extends BaseState<T> {
     public static create =
-        <T = any, States extends BaseState[] = BaseState[]>(states: States, combiner: (statesList: States) => T, comparator: Comparator) =>
+        <T = any, States extends BaseState[] = BaseState[]>(states: States, combiner: (statesList: States) => T, comparator?: Comparator) =>
             new CompositionState(states, combiner, comparator);
 
     public static defaultComparator: Comparator = (oldValue, newValue) => oldValue === newValue;
@@ -31,7 +31,7 @@ export class CompositionState<T = any, States extends BaseState[] = BaseState[]>
 
     protected handleSyncChange() {
         const value = this.getActualValue();
-        if (!this.comparator(this.value, value)) {
+        if (this.comparator(this.value, value)) {
             return;
         }
         const previous = this.value;
