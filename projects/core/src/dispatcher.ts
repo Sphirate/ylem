@@ -1,4 +1,4 @@
-import { EventSource } from "@ylem/event-source";
+import { EventSource, EventSourceListener } from "@ylem/event-source";
 
 export interface Change<StateType = any> {
     current: StateType;
@@ -9,20 +9,25 @@ export interface Change<StateType = any> {
 
 const changesQueue = new Map<EventSource, Change<any>>();
 
+const simultaneousDispatch = (eventSources: EventSource[]) => {
+    const listeners: Set<EventSourceListener> = new Set();
+    eventSources.map((eventSource) => ((eventSource as any).listeners as Set<EventSourceListener>).forEach((listener) => listeners.add(listener)));
+    listeners.forEach((listener) => listener());
+};
+
 const performUpdate = () => {
-    if (changesQueue.size === 0) {
-        return;
-    }
+    const eventSources: EventSource[] = [];
     changesQueue.forEach((change) => {
         const { current, previous, comparator, eventSource } = change;
         if (comparator(current, previous)) {
             return;
         }
 
-        eventSource.dispatch();
+        eventSources.push(eventSource);
     });
 
     changesQueue.clear();
+    simultaneousDispatch(eventSources);
 };
 
 export const stateChanged = <T>(change: Change<T>) => {
