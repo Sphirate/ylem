@@ -13,6 +13,7 @@ export const connect =
     <States extends StatesMap>(states: States) =>
         <ComponentProps extends UnwrappedStatesMap<States>>(Component: React.ComponentType<ComponentProps>) =>
             class extends React.Component<Omit<ComponentProps, keyof States>, States> {
+                public static displayName: string = `Unwrapped(${ Component.displayName || Component.name || "NamelessComponent" })`;
                 public state: Readonly<UnwrappedStatesMap<States>>;
                 public unsubscribers: Array<() => void> = [];
 
