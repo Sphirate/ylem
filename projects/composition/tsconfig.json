@@ -5,13 +5,15 @@
         "composite": true,
         "baseUrl": ".",
         "paths": {
-            "@ylem/core": ["./../core"]
+            "@ylem/core": ["./../core"],
+            "@ylem/state": ["./../state"]
         }
     },
     "include": [
         "."
     ],
     "references": [
-        { "path": "./../core" }
+        { "path": "./../core" },
+        { "path": "./../state" }
     ]
 }
